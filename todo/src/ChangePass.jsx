@@ -32,12 +32,12 @@ import 'react-toastify/dist/ReactToastify.css';
             setError('')
             const response = await axios.post(`http://${ip}:8000/api/account/reset-password/`,data);
             console.log(response.data);
-            // alert('Password changed please login again')
-
+            alert('Password changed please login again')
+  
             toast.success('Password changed please login again', {
               position: "top-center",
               autoClose: 3000,
-              hideProgressBar: false,
+              hideProgressBar: true,
               closeOnClick: true,
               pauseOnHover: true,
               draggable: true,

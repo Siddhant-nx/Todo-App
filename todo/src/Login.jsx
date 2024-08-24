@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from './AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -29,7 +31,16 @@ function Login() {
             navigate('/Home');
         } catch (error) {
             console.error('Error logging in:', error);
-            setError('Invalid email or password');
+            toast.error('Invalid email or password', {
+                position: "top-center",
+                autoClose: 4000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
         }
     };
 
@@ -44,7 +55,6 @@ function Login() {
 
     return (
         <> 
-            <Link to='/UserLog'>Home</Link>
             <h2 className='login-h2'>Hi, Welcome Back</h2>
             <div className='c2'>
                 <form className='form2' onSubmit={handleSubmit}>
@@ -90,6 +100,7 @@ function Login() {
                             <label className='already-user2'>New user?</label>
                             <Link className="sign-btn2" to="/Signup">Signup</Link>
                             <p className='error'>{error}</p>
+                            <ToastContainer />
                         </div>
                     </div>
                 </form>

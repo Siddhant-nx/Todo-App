@@ -25,7 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
         toast.success('OTP has been sent', {
           position: "top-center",
           autoClose: 3000,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -65,7 +65,7 @@ import 'react-toastify/dist/ReactToastify.css';
           toast.error('Invalid OTP', {
             position: "top-center",
             autoClose: 3000,
-            hideProgressBar: false,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,

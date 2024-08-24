@@ -61,7 +61,6 @@ import axios from 'axios'
 
   return (
     <>
-    <button className='admin-btn'><Link to="/ManagerReg">Admin</Link></button>
     <p className='p1'>Create an Account</p>
     <div className='container'>
     {submitted?( 
