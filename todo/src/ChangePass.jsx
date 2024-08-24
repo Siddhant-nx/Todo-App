@@ -33,7 +33,7 @@ import 'react-toastify/dist/ReactToastify.css';
             const response = await axios.post(`http://${ip}:8000/api/account/reset-password/`,data);
             console.log(response.data);
             alert('Password changed please login again')
-  
+            
             toast.success('Password changed please login again', {
               position: "top-center",
               autoClose: 3000,

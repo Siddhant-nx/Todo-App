@@ -9,7 +9,7 @@ import search from './part 2/search.svg'
 
  function Home() {
     const [notes, setNotes] = useState([]);
-    const [input, setInput] = useState('');
+    const [input, setInput] = useState(''); 
     const [error, setError] = useState('');
     // const [ddate, setDdate] = useState('');
     // const [select, setSelected] = useState('all');
