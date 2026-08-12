@@ -22,7 +22,10 @@ class RegisterView(APIView):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        print("USER CREATED")
+        print("EMAIL:", serializer.data['email'])
         send_otp_via_mail(serializer.data['email'])
+        print("OTP EMAIL SENT")
         return Response(serializer.data)
     
 class ResendOtp(APIView):
