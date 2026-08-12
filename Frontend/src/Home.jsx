@@ -42,7 +42,7 @@ function Home() {
     } else {
       setNotes([]);
     }
-  }, [auth]);
+  }, [auth, API_URL]);
 
   const handleLogout = () => {
     logout();

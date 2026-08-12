@@ -4,8 +4,8 @@ import axios from 'axios';
 import AuthContext from '../AuthContext';
 import svg from '../svg.svg'
 import log from '../logout.svg'
-import add from '../addbutton.svg'
 import search from './search.svg'
+// import add from '../addbutton.svg'
 
  function UserLog() {
     const [notes, setNotes] = useState([]);
@@ -44,42 +44,42 @@ import search from './search.svg'
   } else {
     setNotes([]);
   }
-}, [auth]);
+}, [auth, API_URL]);
 
   const handleLogout = () => {
     logout();
     navigate('/login')
   }
-    const handleAddItem = async (e) => {
-        e.preventDefault();
-        if (input) {
-          const newTodo = {
-            title: input,
-            status: false
-          };
+    // const handleAddItem = async (e) => {
+    //     e.preventDefault();
+    //     if (input) {
+    //       const newTodo = {
+    //         title: input,
+    //         status: false
+    //       };
     
-          try{
-            const token = localStorage.getItem('token');
-            const InsertResponse = await axios.post(`${API_URL}/api/todos/`,
-              newTodo,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`
-                }
-              },
-            );
+    //       try{
+    //         const token = localStorage.getItem('token');
+    //         const InsertResponse = await axios.post(`${API_URL}/api/todos/`,
+    //           newTodo,
+    //           {
+    //             headers: {
+    //               Authorization: `Bearer ${token}`
+    //             }
+    //           },
+    //         );
 
-          setNotes([InsertResponse.data, ...notes]);
-          setInput('');
-          setError('');
-          console.log(InsertResponse.data);
-          }catch(error){
-        console.log('error adding',error);
-        }
-      } else {
-        setError('Enter a note');
-      }
-    }
+    //       setNotes([InsertResponse.data, ...notes]);
+    //       setInput('');
+    //       setError('');
+    //       console.log(InsertResponse.data);
+    //       }catch(error){
+    //     console.log('error adding',error);
+    //     }
+    //   } else {
+    //     setError('Enter a note');
+    //   }
+    // }
 
     const handleRemove = async(id)=>{
       try{
