@@ -9,8 +9,8 @@ import search from './search.svg'
 
  function UserLog() {
     const [notes, setNotes] = useState([]);
-    const [input, setInput] = useState('');
     const [error, setError] = useState('');
+    // const [input, setInput] = useState('');
     // const [ddate, setDdate] = useState('');
     // const [select, setSelected] = useState('all');
     const [search_td, setSearch_td] = useState('');
