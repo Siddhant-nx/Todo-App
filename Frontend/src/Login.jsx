@@ -10,7 +10,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     // const [spassword, setSpassword] = useState(false);
-    const ip = '127.0.0.1';
+    const API_URL = process.env.REACT_APP_API_URL
     
     const { setAuth } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Login() {
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://${ip}:8000/api/account/login/`, {
+            const response = await axios.post(`${API_URL}/api/account/login/`, {
                 email: email,
                 password: password
             });

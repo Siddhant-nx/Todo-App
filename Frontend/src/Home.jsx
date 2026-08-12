@@ -15,7 +15,7 @@ function Home() {
 
   const { auth, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const ip = "127.0.0.1";
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     if (auth) {
@@ -23,7 +23,7 @@ function Home() {
         try {
           const token = localStorage.getItem("token");
           if (token) {
-            const getnote = await axios.get(`http://${ip}:8000/api/todos/`, {
+            const getnote = await axios.get(`${API_URL}/api/todos/`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -66,7 +66,7 @@ function Home() {
       try {
         const token = localStorage.getItem("token");
         const InsertResponse = await axios.post(
-          `http://${ip}:8000/api/todos/`,
+          `${API_URL}/api/todos/`,
           newTodo,
           {
             headers: {
@@ -92,7 +92,7 @@ function Home() {
   const handleRemove = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://${ip}:8000/api/todos/${id}/`, {
+      await axios.delete(`${API_URL}/api/todos/${id}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -130,7 +130,7 @@ function Home() {
       const updatedNote = notes.find((note) => note.id === noteId);
       updatedNote.status = checked;
 
-      await axios.put(`http://${ip}:8000/api/todos/${noteId}/`, updatedNote, {
+      await axios.put(`${API_URL}/api/todos/${noteId}/`, updatedNote, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

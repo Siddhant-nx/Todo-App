@@ -10,12 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
     const { email } = location.state || {};
     const [otp, setOtp] = useState('');
     const [error, setError] = useState('');
-    const ip = '127.0.0.1';
+    const API_URL = process.env.REACT_APP_API_URL
 
     const sendOtp = async (e) => {
      e.preventDefault();
       try {
-        const response = await axios.post(`http://${ip}:8000/api/account/register/resendotp/`, {email});
+        const response = await axios.post(`${API_URL}/api/account/register/resendotp/`, {email});
         console.log(response.data);
         console.log("resent-otp")
 
@@ -42,7 +42,7 @@ import 'react-toastify/dist/ReactToastify.css';
           otp: otp
         }
         try {
-          const response = await axios.post(`http://${ip}:8000/api/account/register/verifyotp/`, data);
+          const response = await axios.post(`${API_URL}/api/account/register/verifyotp/`, data);
           console.log(response.data);
 
           if(otp){

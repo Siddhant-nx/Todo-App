@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
     const [error, setError] = useState('')
     const location = useLocation();
     const {email, otp} = location.state || {};
-    const ip = '127.0.0.1';
+    const API_URL = process.env.REACT_APP_API_URL
 
     const reset=async(e)=>{
         e.preventDefault();
@@ -28,7 +28,7 @@ import 'react-toastify/dist/ReactToastify.css';
             if(password === rpassword){
 
             setError('')
-            const response = await axios.post(`http://${ip}:8000/api/account/reset-password/`,data);
+            const response = await axios.post(`${API_URL}/api/account/reset-password/`,data);
             console.log(response.data);
             alert('Password changed please login again')
             
