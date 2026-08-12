@@ -15,8 +15,7 @@ SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "django-local-development-secret-key-change-in-production"
 )
-
-#"django-insecure-ule)tz%yh@t+$nq0r(33&(+e7d^)4dl7r3txof8p0p$xy+eg73"
+#SECRET_KEY = "django-insecure-ule)tz%yh@t+$nq0r(33&(+e7d^)4dl7r3txof8p0p$xy+eg73"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
@@ -191,8 +190,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST= os.environ.get("EMAIL_HOST") #"smtp.gmail.com"
+EMAIL_HOST= os.environ.get("EMAIL_HOST")
 EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
 EMAIL_PORT= int(os.environ.get("EMAIL_PORT", 587))
-EMAIL_HOST_USER= os.environ.get("EMAIL_HOST_USER") #"tmailgun03@gmail.com"
-EMAIL_HOST_PASSWORD= os.environ.get("EMAIL_HOST_PASSWORD") # "mracppygmlaxayuf"
+EMAIL_HOST_USER= os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD= os.environ.get("EMAIL_HOST_PASSWORD")
