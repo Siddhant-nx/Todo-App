@@ -1,3 +1,5 @@
+import os
+import dj_database_url
 from datetime import timedelta
 from pathlib import Path
 
@@ -9,12 +11,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ule)tz%yh@t+$nq0r(33&(+e7d^)4dl7r3txof8p0p$xy+eg73"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-local-development-secret-key-change-in-production"
+)
+
+#"django-insecure-ule)tz%yh@t+$nq0r(33&(+e7d^)4dl7r3txof8p0p$xy+eg73"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -70,12 +77,18 @@ WSGI_APPLICATION = "todo.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DATABASE_URL = os.environ.get("DATABASE_URL") 
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL)
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # DATABASES = {
 #     "default": {
@@ -124,6 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -177,8 +191,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_USE_TLS=True
-EMAIL_PORT=587
-EMAIL_HOST_USER="tmailgun03@gmail.com"
-EMAIL_HOST_PASSWORD="mracppygmlaxayuf"
+EMAIL_HOST= os.environ.get("EMAIL_HOST") #"smtp.gmail.com"
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
+EMAIL_PORT= int(os.environ.get("EMAIL_PORT", 587))
+EMAIL_HOST_USER= os.environ.get("EMAIL_HOST_USER") #"tmailgun03@gmail.com"
+EMAIL_HOST_PASSWORD= os.environ.get("EMAIL_HOST_PASSWORD") # "mracppygmlaxayuf"
