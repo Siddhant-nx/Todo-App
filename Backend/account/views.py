@@ -19,14 +19,26 @@ class MyTokenObtainPairViews(TokenObtainPairView):
 # view for registering users
 class RegisterView(APIView):
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        print("USER CREATED")
-        print("EMAIL:", serializer.data['email'])
-        send_otp_via_mail(serializer.data['email'])
-        print("OTP EMAIL SENT")
-        return Response(serializer.data)
+        # serializer = UserSerializer(data=request.data)
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
+        # send_otp_via_mail(serializer.data['email'])
+        # return Response(serializer.data)
+        try:
+            print("REGISTER START")
+            serializer = UserSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            print("SERIALIZER VALID")
+            serializer.save()
+            print("USER SAVED")
+            email = serializer.data['email']
+            print("Sending OTP to:", email)
+            send_otp_via_mail(email)
+            print("OTP sent successfully")
+            return Response(serializer.data)
+        except Exception as e:
+            print("REGISTER ERROR:", repr(e))
+            raise
     
 class ResendOtp(APIView):
     def post(self,request):
