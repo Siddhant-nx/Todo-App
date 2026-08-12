@@ -2,6 +2,7 @@ import os
 import dj_database_url
 from datetime import timedelta
 from pathlib import Path
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -189,9 +190,10 @@ SIMPLE_JWT = {
 CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ["*"]
 
+load_dotenv()
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "True") == "True"
 EMAIL_PORT= int(os.environ.get("EMAIL_PORT", 587))
-EMAIL_HOST= os.environ.get("EMAIL_HOST", "smtp.gmail.com")
-EMAIL_HOST_USER= os.environ.get("EMAIL_HOST_USER", "tmailgun03@gmail.com")
-EMAIL_HOST_PASSWORD= os.environ.get("EMAIL_HOST_PASSWORD", "mracppygmlaxayuf")
+EMAIL_HOST= os.environ.get("EMAIL_HOST")
+EMAIL_HOST_USER= os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD= os.environ.get("EMAIL_HOST_PASSWORD")
