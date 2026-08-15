@@ -17,7 +17,7 @@ function Signup() {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setError("Email is not valid");
+      setError("Please enter valid Email address");
       return;
     } else {
       setError("");
@@ -105,7 +105,7 @@ function Signup() {
                     Already user?
                     <br />
                     <Link to="/Login" className="sign-btn">
-                      Singin
+                      Sign in
                     </Link>{" "}
                   </label>
                 </div>

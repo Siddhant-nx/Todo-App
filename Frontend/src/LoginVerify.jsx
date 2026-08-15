@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,9 +9,24 @@ import 'react-toastify/dist/ReactToastify.css';
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
     const [otp, setOtp] = useState('');
+    const [resendTimer, setResendTimer] = useState(0); //resend otp timer
+    const [flag, setFlag] = useState(false);
+    const [otpSent, setOtpSent] = useState(false);
     const API_URL = process.env.REACT_APP_API_URL
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    //resend otp timer
+    useEffect(() => {
+      if (resendTimer <= 0) return;
+
+      const timer = setInterval(() => {
+        setResendTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }, [resendTimer]);
+    //resend otp timer
 
         const sendOtp = async (e) => {
           e.preventDefault();
@@ -38,11 +53,16 @@ import 'react-toastify/dist/ReactToastify.css';
               theme: "light",
             });
 
+            setResendTimer(60);
+            setFlag(false);
+            setOtpSent(true);
+
            } catch (error) {
+             setFlag(true);
              console.log('Error sending OTP');
              //setError('User does not exist, please Singup first')
 
-             toast.error('Some internal error occurred', {
+             toast.error('Some unknown error occurred', {
               position: "top-center",
               autoClose: 3000,
               hideProgressBar: true,
@@ -91,10 +111,12 @@ import 'react-toastify/dist/ReactToastify.css';
     <div className='container3'>
         {/* <label className='otp-label'>Enter OTP sent to your RegistredEmail Address</label> */}
         <input type="text" className='i1' placeholder='enter Email' value={email} onChange={(e)=> setEmail(e.target.value)} required/>
-        <input type="text" className='i1' placeholder='enter OTP'value={otp} onChange={(e)=> setOtp(e.target.value)} required/>
-        <button type='submit' className='LButton2' onClick={sendOtp}>Send OTP</button>
-        <button type='submit' className='LButton2' onClick={sendOtp}>Resend</button>
-        <button type='submit' className='LButton2' onClick={verify}>Confirm</button>
+        <input type="number" className='i1' placeholder='enter OTP'value={otp} onChange={(e)=> setOtp(e.target.value)} required/>
+        <div className='otp-btn-div'>
+        <button type='submit' className='LButton2' disabled={!emailRegex.test(email) || otpSent} onClick={sendOtp}>Send OTP</button>
+        <button type='submit' className='LButton2' disabled={resendTimer > 0 || !otpSent} onClick={sendOtp}> {resendTimer > 0 ? `Resend OTP (${resendTimer}s)`: 'Resend OTP' }</button>
+        </div>
+        <button type='submit' className='LButton2' disabled={!otp.trim() || !emailRegex.test(email) || flag} onClick={verify}>Confirm</button>
         <p className='error2'>{error}</p>
 
         <ToastContainer/>

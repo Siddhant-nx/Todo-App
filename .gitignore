@@ -26,5 +26,6 @@ __pycache__/
 *.py[cod]
 venv/
 .env
+*.env
 build/
 dist/

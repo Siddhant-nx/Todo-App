@@ -120,7 +120,7 @@ label{
   text-align: center;
   font-size: 2.5vh;
   margin-top: 20px;
-  font-weight: 350;
+  font-weight: 400;
 }
 
 .password-container{
@@ -198,21 +198,6 @@ body{
 }
 .already-user2{
   margin-left: 10cap;
-}
-
-.otp-btn-div{
-  display: flex;
-  gap: 10px;
-  width: 100%;
-}
-.otp-btn-div button{
-  flex: 1;
-}
-
-.LButton2:disabled{
-  /* background-color: rgba(177, 173, 75, 0.5); */
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 /*  home page */
